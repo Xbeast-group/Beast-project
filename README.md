@@ -1,3 +1,3 @@
 # Beast-project
- team member are three
- term LGL is ItzzzBeast 
+ team member are three 
+ term IGL is ItzzzBeast 
