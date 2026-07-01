@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevProof | Unified Identity</title>
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-blue: #58a6ff;
+            --github-green: #2ea043;
+            --leetcode-orange: #ffa116;
+            --linkedin-blue: #0a66c2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #30363d;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .verified-badge {
+            display: inline-block;
+            background-color: var(--github-green);
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Grid Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Metric Styling */
+        .metric-group {
+            margin-bottom: 1rem;
+        }
+        
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        /* Skill Graph (Normalized Data) */
+        .skill-section {
+            background-color: var(--bg-card);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .skill-bar-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .bar-background {
+            width: 100%;
+            height: 12px;
+            background-color: #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .bar-segment {
+            height: 100%;
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Alex Developer <span class="verified-badge">✓ Cryptographically Verified</span></h1>
+        <p class="subtitle">Unified Proof of Work Graph</p>
+    </header>
+
+    <div class="dashboard">
+        <!-- GitHub Card -->
+        <div class="card">
+            <h2>
+                <span class="dot" style="background-color: var(--github-green);"></span>
+                GitHub (Builder Profile)
+            </h2>
+            <div class="metric-group">
+                <div class="metric-label">Total Commits (Last YR)</div>
+                <div class="metric-value">1,432</div>
+            </div>
+            <div class="metric-group">
+                <div class="metric-label">Top Repositories Maintained</div>
+                <div class="metric-value">4</div>
+            </div>
+            <div class="metric-group">
+                <div class="metric-label">Impact Score</div>
+                <div class="metric-value">Top 5%</div>
+            </div>
+        </div>
+
+        <!-- LeetCode Card -->
+        <div class="card">
+            <h2>
+                <span class="dot" style="background-color: var(--leetcode-orange);"></span>
+                LeetCode (Logic Profile)
+            </h2>
+            <div class="metric-group">
+                <div class="metric-label">Contest Rating</div>
+                <div class="metric-value">1,845 (Knight)</div>
+            </div>
+            <div class="metric-group">
+                <div class="metric-label">Problems Solved (Hard)</div>
+                <div class="metric-value">42</div>
+            </div>
+            <div class="metric-group">
+                <div class="metric-label">Algorithmic Focus</div>
+                <div class="metric-value">Dynamic Programming</div>
+            </div>
+        </div>
+
+        <!-- LinkedIn Card -->
+        <div class="card">
+            <h2>
+                <span class="dot" style="background-color: var(--linkedin-blue);"></span>
+                LinkedIn (Reputation Profile)
+            </h2>
+            <div class="metric-group">
+                <div class="metric-label">Years of Experience</div>
+                <div class="metric-value">5+</div>
+            </div>
+            <div class="metric-group">
+                <div class="metric-label">Peer Endorsements</div>
+                <div class="metric-value">128 Validated</div>
+            </div>
+            <div class="metric-group">
+                <div class="metric-label">Recent Role</div>
+                <div class="metric-value">Senior Engineer @ TechCorp</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Normalized Skill Graph -->
+    <section class="skill-section">
+        <h2 style="margin-bottom: 1.5rem; color: white;">Unified Skill Graph</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+            True competency calculated by aggregating code shipped (GitHub), algorithms solved (LeetCode), and peer validations (LinkedIn).
+        </p>
+
+        <!-- Python Skill -->
+        <div class="skill-bar-container">
+            <div class="skill-header">
+                <span>Python / Backend</span>
+                <span>Level 92</span>
+            </div>
+            <div class="bar-background">
+                <!-- 50% from GitHub, 30% from LeetCode, 12% from LinkedIn -->
+                <div class="bar-segment" style="width: 50%; background-color: var(--github-green);" title="GitHub Contribution"></div>
+                <div class="bar-segment" style="width: 30%; background-color: var(--leetcode-orange);" title="LeetCode Algorithms"></div>
+                <div class="bar-segment" style="width: 12%; background-color: var(--linkedin-blue);" title="LinkedIn Endorsements"></div>
+            </div>
+        </div>
+
+        <!-- JavaScript / React Skill -->
+        <div class="skill-bar-container">
+            <div class="skill-header">
+                <span>JavaScript / React</span>
+                <span>Level 85</span>
+            </div>
+            <div class="bar-background">
+                <!-- 60% from GitHub, 5% from LeetCode, 20% from LinkedIn -->
+                <div class="bar-segment" style="width: 60%; background-color: var(--github-green);"></div>
+                <div class="bar-segment" style="width: 5%; background-color: var(--leetcode-orange);"></div>
+                <div class="bar-segment" style="width: 20%; background-color: var(--linkedin-blue);"></div>
+            </div>
+        </div>
+        
+        <!-- C++ Skill -->
+        <div class="skill-bar-container">
+            <div class="skill-header">
+                <span>C++ / Systems</span>
+                <span>Level 70</span>
+            </div>
+            <div class="bar-background">
+                <!-- 20% from GitHub, 40% from LeetCode, 10% from LinkedIn -->
+                <div class="bar-segment" style="width: 20%; background-color: var(--github-green);"></div>
+                <div class="bar-segment" style="width: 40%; background-color: var(--leetcode-orange);"></div>
+                <div class="bar-segment" style="width: 10%; background-color: var(--linkedin-blue);"></div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="dot" style="background-color: var(--github-green);"></span> Shipped Code (GitHub)
+            </div>
+            <div class="legend-item">
+                <span class="dot" style="background-color: var(--leetcode-orange);"></span> Problem Solving (LeetCode)
+            </div>
+            <div class="legend-item">
+                <span class="dot" style="background-color: var(--linkedin-blue);"></span> Verified Experience (LinkedIn)
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
