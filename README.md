@@ -1,7 +1,8 @@
 # Beast-project
 Sudhansh-frontend
+<br>
 Backend
-BEAST
-SHASHANK
-JABED
+BEAST <br>
+SHASHANK <br>
+JABED 
 
