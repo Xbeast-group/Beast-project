@@ -1,8 +1,4 @@
 # Beast-project
-Sudhansh-frontend
-<br>
-Backend <br>
-BEAST <br>
-SHASHANK <br>
-JABED 
-
+Shahsank
+myself Shashank 
+i m learning coding and participating in hackathon
