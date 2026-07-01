@@ -1,2 +1,7 @@
 # Beast-project
-Sudhanshu
+Sudhansh-frontend
+Backend
+BEAST
+SHASHANK
+JABED
+
