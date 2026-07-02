@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Optimizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold mb-4 text-center">Modern Portfolio Optimizer</h1>
+        
+        <div class="flex gap-4 mb-6">
+            <input type="text" id="tickerInput" placeholder="Enter Stock (e.g. AAPL)" class="border p-2 w-full rounded uppercase">
+            <button id="addBtn" class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-600">Add</button>
+            <button id="runBtn" class="bg-green-500 text-white px-4 py-2 rounded font-bold hover:bg-green-600">Run Optimization</button>
+        </div>
+
+        <ul id="stockList" class="flex gap-2 mb-6 font-semibold text-blue-700 flex-wrap"></ul>
+
+        <div class="w-full h-[400px]">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
