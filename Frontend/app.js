@@ -7,6 +7,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
 let stocks = [];
 let chartInstance = null;
 
+// 1. Add Button ka logic (Same as before)
 addBtn.addEventListener('click', () => {
     const stockName = tickerInput.value.toUpperCase();
     if (stockName !== "" && !stocks.includes(stockName)) {
@@ -21,23 +22,50 @@ addBtn.addEventListener('click', () => {
     }
 });
 
-runBtn.addEventListener('click', () => {
+// 2. Run Button ka naya logic (Backend API se connect karne ke liye)
+runBtn.addEventListener('click', async () => {
     if (stocks.length < 2) {
         alert("Bhai, kam se kam 2 stocks toh daalo optimization ke liye!");
         return;
     }
 
-    // Mock Data jab tak backend connect nahi hota
-    const mockRandomPortfolios = [
-        {x: 12, y: 5}, {x: 15, y: 8}, {x: 18, y: 10}, 
-        {x: 20, y: 11}, {x: 14, y: 6}, {x: 17, y: 9},
-        {x: 13, y: 7}, {x: 19, y: 9.5}, {x: 16, y: 7.5}
-    ];
-    const mockOptimalPortfolio = [{x: 14, y: 12}]; 
+    // Button ko 'Loading' state mein dalna
+    const originalText = runBtn.textContent;
+    runBtn.textContent = "Calculating Asli Data...";
+    runBtn.disabled = true;
 
-    drawChart(mockRandomPortfolios, mockOptimalPortfolio);
+    try {
+        // Yahan hum Python backend ko stocks ki list bhej rahe hain
+        // Note: 'http://localhost:8000/optimize' aapke Python server ka address hoga
+        const response = await fetch('http://localhost:8000/optimize', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ tickers: stocks })
+        });
+
+        if (!response.ok) {
+            throw new Error("Backend se data nahi aaya!");
+        }
+
+        // Python jo asli math karke bhejega, usko yahan receive karenge
+        const realData = await response.json();
+
+        // Asli data ko graph par draw karna
+        drawChart(realData.randomPortfolios, realData.optimalPortfolio);
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Server connect nahi hua. Please backend chalu karein ya console check karein!");
+    } finally {
+        // Button ko wapas normal karna
+        runBtn.textContent = originalText;
+        runBtn.disabled = false;
+    }
 });
 
+// 3. Graph draw karne ka function (Same as before)
 function drawChart(randomData, optimalData) {
     if (chartInstance) {
         chartInstance.destroy();
