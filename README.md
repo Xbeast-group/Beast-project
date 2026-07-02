@@ -1,5 +1,9 @@
 # Beast-project
-<b>Project name is Modern-Portfolio-WebPage</b><br>
-Shahsank
-myself Shashank 
-i m learning coding and participating in hackathon
+Project name is <b><i>Modern-Portfolio-WebPage</b></i><br>
+frontend <br>
+Sudhanshu Kumar <br>
+Backend <br>
+BEAST  <br>
+SHASHANK <br><br>
+API <br>
+JABED    <br>
