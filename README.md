@@ -1,6 +1,6 @@
 # Beast-project
 Project name is <b><i>Modern-Portfolio-WebPage</b></i><br>
-<b>frontend</b> <br>
+<b>Frontend</b> <br>
 Sudhanshu Kumar <br>
 <b>Backend</b> <br>
 BEAST  <br>
