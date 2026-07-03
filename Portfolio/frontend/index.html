@@ -3,46 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio Prototype</title>
+    <title>Portfolio Optimizer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <nav>
-        <div class="logo">DevPortfolio</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <header id="about">
-        <h1>Hi, I'm a Full-Stack Developer</h1>
-        <p>I build clean, functional web applications.</p>
-    </header>
-
-    <section id="projects">
-        <h2>My Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Project One</h3>
-                <p>A cool web application prototype built with HTML, CSS, and Node.js.</p>
-            </div>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold mb-4 text-center">Modern Portfolio Optimizer</h1>
+        
+        <div class="flex gap-4 mb-6">
+            <input type="text" id="tickerInput" placeholder="Enter Stock (e.g. AAPL)" class="border p-2 w-full rounded uppercase">
+            <button id="addBtn" class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-600">Add</button>
+            <button id="runBtn" class="bg-green-500 text-white px-4 py-2 rounded font-bold hover:bg-green-600">Run Optimization</button>
         </div>
-    </section>
 
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <p id="formResponse"></p>
-    </section>
+        <ul id="stockList" class="flex gap-2 mb-6 font-semibold text-blue-700 flex-wrap"></ul>
 
-    <script src="script.js"></script>
+        <div class="w-full h-[400px]">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Custom JS -->
+    <script src="app.js"></script>
 </body>
 </html>

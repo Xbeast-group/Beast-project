@@ -1,72 +1,83 @@
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+const tickerInput = document.getElementById('tickerInput');
+const addBtn = document.getElementById('addBtn');
+const runBtn = document.getElementById('runBtn');
+const stockList = document.getElementById('stockList');
+const ctx = document.getElementById('myChart').getContext('2d');
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    const responseText = document.getElementById('formResponse');
+let stocks = [];
+let chartInstance = null;
+
+addBtn.addEventListener('click', () => {
+    const stockName = tickerInput.value.toUpperCase();
+    if (stockName !== "" && !stocks.includes(stockName)) {
+        stocks.push(stockName);
+        const li = document.createElement('li');
+        li.textContent = stockName;
+        li.className = "bg-blue-100 px-3 py-1 rounded shadow-sm";
+        stockList.appendChild(li);
+        tickerInput.value = ""; 
+    }
+});
+
+runBtn.addEventListener('click', async () => {
+    if (stocks.length < 2) {
+        alert("Please enter at least 2 stocks!");
+        return;
+    }
+
+    const originalText = runBtn.textContent;
+    runBtn.textContent = "Calculating...";
+    runBtn.disabled = true;
 
     try {
-        // Send data to our Node.js Back-End
-        const response = await fetch('http://localhost:5000/api/contact', {
+        const response = await fetch('http://localhost:8000/optimize', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, message })
+            body: JSON.stringify({ tickers: stocks })
         });
 
-        const data = await response.json();
-        
-        if (response.ok) {
-            responseText.innerText = "🚀 Message sent successfully!";
-            responseText.style.color = "green";
-            document.getElementById('contactForm').reset();
-        } else {
-            responseText.innerText = "❌ Error: " + data.error;
-            responseText.style.color = "red";
-        }
-    } catch (error) {
-        responseText.innerText = "❌ Could not connect to the backend server.";
-        responseText.style.color = "red";
-    }
-});
-// frontend/script.js
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Stop the page from refreshing when clicking submit
+        if (!response.ok) throw new Error("Backend connection failed!");
 
-    // Extract values from the HTML inputs
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    const responseText = document.getElementById('formResponse');
-
-    // Update status text to show something is happening
-    responseText.innerText = "Sending...";
-    responseText.style.color = "orange";
-
-    try {
-        // Send a POST request to our local Node.js backend
-        const response = await fetch('http://localhost:5000/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, message })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            responseText.innerText = "🚀 Message sent successfully to the backend!";
-            responseText.style.color = "green";
-            document.getElementById('contactForm').reset(); // Clear the form
-        } else {
-            responseText.innerText = `❌ Server Error: ${data.error}`;
-            responseText.style.color = "red";
-        }
+        const realData = await response.json();
+        drawChart(realData.randomPortfolios, realData.optimalPortfolio);
 
     } catch (error) {
-        console.error("Fetch error:", error);
-        responseText.innerText = "❌ Could not connect to the server. Is the backend running?";
-        responseText.style.color = "red";
+        console.error("Error:", error);
+        alert("Server connect nahi hua! Python backend chalu karein.");
+    } finally {
+        runBtn.textContent = originalText;
+        runBtn.disabled = false;
     }
 });
+
+function drawChart(randomData, optimalData) {
+    if (chartInstance) chartInstance.destroy();
+
+    chartInstance = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [
+                {
+                    label: 'Random Portfolios',
+                    data: randomData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    pointRadius: 4
+                },
+                {
+                    label: 'Optimal Portfolio',
+                    data: optimalData,
+                    backgroundColor: 'red',
+                    pointRadius: 8
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { title: { display: true, text: 'Risk (Volatility)' } },
+                y: { title: { display: true, text: 'Expected Return' } }
+            }
+        }
+    });
+}
