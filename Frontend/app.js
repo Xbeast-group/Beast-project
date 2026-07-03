@@ -61,9 +61,12 @@ body {
 }
 
 /* Jab mouse button ke upar jayega (Hover effect) */
+
 .btn:hover {
     /* Hover karne par colors ulte ho jayenge */
     background: linear-gradient(90deg, #8a2be2, #1c2541); 
-    transform: translateY(-3px); /* Button thoda upar uthega */
+    transform: translateY(-3px);
+
+    /* Button thoda upar uthega */
     box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4); /* Purple glow */
 }
