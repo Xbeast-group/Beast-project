@@ -79,3 +79,105 @@ app.use((req, res, Land) => {
 app.listen(PORT, () => {
     console.log(`Server blasting off on port ${PORT} 🚀`);
 });
+// --- EXTERNAL API INTEGRATIONS ---
+
+// 1. GitHub API Route
+// Fetches live data like followers, public repos, and bio.
+app.get('/api/github/:username', async (req, res) => {
+    const { username } = req.params;
+    
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}`);
+        
+        if (!response.ok) {
+            return res.status(response.status).json({ error: "GitHub user not found" });
+        }
+        
+        const data = await response.json();
+        
+        // Pick only the data you want to send to your frontend
+        const profileData = {
+            username: data.login,
+            name: data.name,
+            avatar_url: data.avatar_url,
+            repos: data.public_repos,
+            followers: data.followers,
+            profile_url: data.html_url
+        };
+        
+        res.status(200).json(profileData);
+    } catch (error) {
+        console.error("GitHub API Error:", error);
+        res.status(500).json({ error: "Failed to fetch GitHub data" });
+    }
+});
+
+// 2. LeetCode API Route (Using their public GraphQL endpoint)
+// Fetches your problem-solving stats (Easy, Medium, Hard solved)
+app.get('/api/leetcode/:username', async (req, res) => {
+    const { username } = req.params;
+    
+    // LeetCode requires a GraphQL query
+    const query = `
+        query getUserProfile($username: String!) {
+            matchedUser(username: $username) {
+                submitStats {
+                    acSubmissionNum {
+                        difficulty
+                        count
+                    }
+                }
+            }
+        }
+    `;
+
+    try {
+        const response = await fetch('https://leetcode.com/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Referer': 'https://leetcode.com'
+            },
+            body: JSON.stringify({
+                query: query,
+                variables: { username: username }
+            })
+        });
+
+        const data = await response.json();
+        
+        if (data.errors) {
+            return res.status(404).json({ error: "LeetCode user not found" });
+        }
+
+        // Extract the specific solved problem counts from the messy GraphQL response
+        const stats = data.data.matchedUser.submitStats.acSubmissionNum;
+        
+        res.status(200).json({
+            username: username,
+            totalSolved: stats.find(item => item.difficulty === "All").count,
+            easy: stats.find(item => item.difficulty === "Easy").count,
+            medium: stats.find(item => item.difficulty === "Medium").count,
+            hard: stats.find(item => item.difficulty === "Hard").count
+        });
+        
+    } catch (error) {
+        console.error("LeetCode API Error:", error);
+        res.status(500).json({ error: "Failed to fetch LeetCode data" });
+    }
+});
+
+// 3. LinkedIn "API" Route (Manual/Static Workaround)
+// Since LinkedIn blocks scraping and public API access without OAuth, 
+// the standard practice is to serve your stats from a local object that you update periodically.
+app.get('/api/linkedin', (req, res) => {
+    // You will update these numbers manually once a month or so
+    const linkedInStats = {
+        connections: "500+",
+        followers: 1240,
+        status: "Actively looking for Software Development Internships",
+        profile_url: "https://www.linkedin.com/in/sudhanshu-kumar-b62113407"
+    };
+    
+    res.status(200).json(linkedInStats);
+});
