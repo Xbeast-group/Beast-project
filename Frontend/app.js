@@ -1,72 +1,55 @@
-/* Sabhi elements ki basic setting */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+// HTML Elements ko pakadna
+const loginSection = document.getElementById('login-section');
+const portfolioSection = document.getElementById('portfolio-section');
+const loginBtn = document.getElementById('login-btn');
+const logoutBtn = document.getElementById('logout-btn');
 
-body {
-    /* Yahan background mein Dark Blue aur Purple ka mix (Gradient) hai */
-    background: linear-gradient(135deg, #0b132b, #592e71);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Puri screen gherne ke liye */
-}
+// Login Button Click Event
+loginBtn.addEventListener('click', () => {
+    const githubId = document.getElementById('github-id').value;
+    const username = document.getElementById('username').value;
+    
+    if(githubId === "" || username === "") {
+        alert("Please enter Username and GitHub ID!");
+        return;
+    }
 
-/* Portfolio Card ka design - Glass effect */
-.portfolio-card {
-    background: rgba(255, 255, 255, 0.05); /* Halka transparent */
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px); /* Peeche ka background blur karega */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 350px;
-}
+    // 1. Login Screen Hide karo, Portfolio Show karo
+    loginSection.style.display = "none";
+    portfolioSection.style.display = "block";
 
-.portfolio-card h1 {
-    margin-bottom: 10px;
-    font-size: 24px;
-    letter-spacing: 1px;
-}
+    // 2. GitHub API ko call karo (Real Data Fetching)
+    fetch(`https://api.github.com/users/${githubId}`)
+        .then(response => {
+            if(!response.ok) throw new Error("GitHub user not found");
+            return response.json();
+        })
+        .then(data => {
+            // API se jo data aaya, usko HTML mein daalo
+            document.getElementById('user-name').innerText = data.name || username;
+            document.getElementById('user-bio').innerText = data.bio || "No bio available on GitHub.";
+            
+            // Profile Photo set karo
+            const profilePic = document.getElementById('profile-pic');
+            profilePic.src = data.avatar_url;
+            profilePic.style.display = "inline-block";
 
-.portfolio-card p {
-    margin-bottom: 30px;
-    color: #d1d1d1;
-    font-size: 14px;
-    line-height: 1.5;
-}
+            // Links update karo
+            document.getElementById('link-github').href = data.html_url;
+        })
+        .catch(error => {
+            document.getElementById('user-name').innerText = "Error!";
+            document.getElementById('user-bio').innerText = error.message;
+        });
+});
 
-.links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Buttons ke beech ki jagah */
-}
-
-/* Buttons ka design */
-.btn {
-    text-decoration: none;
-    color: white;
-    /* Button ke andar Dark Blue se Purple ka mix */
-    background: linear-gradient(90deg, #1c2541, #8a2be2); 
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: all 0.3s ease; /* Smooth animation ke liye */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Jab mouse button ke upar jayega (Hover effect) */
-
-.btn:hover {
-    /* Hover karne par colors ulte ho jayenge */
-    background: linear-gradient(90deg, #8a2be2, #1c2541); 
-    transform: translateY(-3px);
-
-    /* Button thoda upar uthega */
-    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4); /* Purple glow */
-}
+// Logout Button Click Event
+logoutBtn.addEventListener('click', () => {
+    // Portfolio hide karo, wapas Login show karo
+    portfolioSection.style.display = "none";
+    loginSection.style.display = "block";
+    
+    // Input fields clear kar do
+    document.getElementById('github-id').value = "";
+    document.getElementById('password').value = "";
+});
