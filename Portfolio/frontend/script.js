@@ -33,3 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+// Example: Sending a message to the backend API
+async function sendContactForm(name, email, message) {
+    try {
+        const response = await fetch('http://localhost:5000/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, message })
+        });
+        
+        const data = await response.json();
+        console.log(data.message); // Logs the backend success message
+    } catch (error) {
+        console.error('Error connecting to backend:', error);
+    }
+}
