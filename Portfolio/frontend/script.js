@@ -1,83 +1,35 @@
-const tickerInput = document.getElementById('tickerInput');
-const addBtn = document.getElementById('addBtn');
-const runBtn = document.getElementById('runBtn');
-const stockList = document.getElementById('stockList');
-const ctx = document.getElementById('myChart').getContext('2d');
-
-let stocks = [];
-let chartInstance = null;
-
-addBtn.addEventListener('click', () => {
-    const stockName = tickerInput.value.toUpperCase();
-    if (stockName !== "" && !stocks.includes(stockName)) {
-        stocks.push(stockName);
-        const li = document.createElement('li');
-        li.textContent = stockName;
-        li.className = "bg-blue-100 px-3 py-1 rounded shadow-sm";
-        stockList.appendChild(li);
-        tickerInput.value = ""; 
-    }
-});
-
-runBtn.addEventListener('click', async () => {
-    if (stocks.length < 2) {
-        alert("Please enter at least 2 stocks!");
-        return;
-    }
-
-    const originalText = runBtn.textContent;
-    runBtn.textContent = "Calculating...";
-    runBtn.disabled = true;
-
-    try {
-        const response = await fetch('http://localhost:8000/optimize', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tickers: stocks })
-        });
-
-        if (!response.ok) throw new Error("Backend connection failed!");
-
-        const realData = await response.json();
-        drawChart(realData.randomPortfolios, realData.optimalPortfolio);
-
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Server connect nahi hua! Python backend chalu karein.");
-    } finally {
-        runBtn.textContent = originalText;
-        runBtn.disabled = false;
-    }
-});
-
-function drawChart(randomData, optimalData) {
-    if (chartInstance) chartInstance.destroy();
-
-    chartInstance = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [
-                {
-                    label: 'Random Portfolios',
-                    data: randomData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    pointRadius: 4
+// 1. SKILLS RADAR CHART
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById('skillsChart');
+    
+    // Check if canvas exists on page before trying to draw the chart
+    if (canvas) {
+        const ctxSkills = canvas.getContext('2d');
+        new Chart(ctxSkills, {
+            type: 'radar',
+            data: {
+                labels: ['C/C++', 'Python', 'Windows/Linux', 'Problem Solving', 'Communication'],
+                datasets: [{
+                    label: 'Skill Level',
+                    data: [85, 75, 80, 90, 85],
+                    backgroundColor: 'rgba(168, 85, 247, 0.5)',
+                    borderColor: 'rgba(168, 85, 247, 1)',
+                    pointBackgroundColor: '#60a5fa',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255,255,255,0.1)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        pointLabels: { color: '#cbd5e1', font: { size: 12 } },
+                        ticks: { display: false, min: 0, max: 100 }
+                    }
                 },
-                {
-                    label: 'Optimal Portfolio',
-                    data: optimalData,
-                    backgroundColor: 'red',
-                    pointRadius: 8
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: { title: { display: true, text: 'Risk (Volatility)' } },
-                y: { title: { display: true, text: 'Expected Return' } }
+                plugins: { legend: { display: false } }
             }
-        }
-    });
-}
+        });
+    }
+});
