@@ -181,3 +181,42 @@ app.get('/api/linkedin', (req, res) => {
     
     res.status(200).json(linkedInStats);
 });
+const jwt = require('jsonwebtoken');
+
+// Secret key for JWT (In production, put this in your .env file)
+const JWT_SECRET = process.env.JWT_SECRET || "super_secret_x_beast_key_2026";
+
+// Dummy Admin Credentials (In a real app, this would be hashed in a database)
+const ADMIN_USER = {
+    username: "sudhanshu",
+    password: "password123" // Change this!
+};
+
+// POST: Login Route
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // 1. Check if username and password match our dummy admin
+    if (username === ADMIN_USER.username && password === ADMIN_USER.password) {
+        
+        // 2. Generate a JWT token that expires in 1 hour
+        const token = jwt.sign(
+            { id: 1, role: 'admin', username: username }, 
+            JWT_SECRET, 
+            { expiresIn: '1h' }
+        );
+
+        // 3. Send the token back to the frontend
+        return res.status(200).json({
+            success: true,
+            message: "Login successful!",
+            token: token
+        });
+    }
+
+    // If credentials fail, send a 401 Unauthorized error
+    return res.status(401).json({
+        success: false,
+        message: "Invalid username or password"
+    });
+});
