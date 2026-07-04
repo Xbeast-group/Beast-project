@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudhanshu Kumar - Developer Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 min-h-screen font-sans overflow-x-hidden">
+
+    <nav class="flex justify-between items-center py-6 px-10 text-white">
+        <h1 class="text-2xl font-bold tracking-widest">PORT<span class="text-purple-400">FOLIO</span></h1>
+        
+        <div class="flex items-center gap-6">
+            <a href="#home" class="hover:text-purple-400 transition font-medium">Home</a>
+            <a href="#projects" class="hover:text-purple-400 transition font-medium">Projects</a>
+            <a href="#resume" class="hover:text-purple-400 transition font-medium">Resume</a>
+            
+            <div class="flex items-center gap-4 ml-4 text-xl border-l border-white/20 pl-6">
+                <a href="#" class="hover:text-purple-400 transition"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-purple-400 transition"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="hover:text-purple-400 transition"><i class="fa-solid fa-code"></i></a>
+                <a href="#" class="hover:text-purple-400 transition"><i class="fa-brands fa-instagram"></i></a>
+                <button onclick="toggleLoginModal()" class="hover:text-purple-400 transition ml-2">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex flex-col md:flex-row justify-between items-center px-10 lg:px-24 py-12 gap-10">
+        
+        <div class="text-white w-full md:w-1/2">
+            <div class="w-32 h-32 rounded-full border-4 border-purple-500/50 flex items-center justify-center bg-slate-800 shadow-[0_0_20px_rgba(168,85,247,0.4)] mb-6">
+                <span class="text-4xl font-bold text-gray-200">SK</span>
+            </div>
+
+            <p class="text-purple-400 font-semibold tracking-widest mb-2 text-sm uppercase">Hello, I Am</p>
+            <h2 class="text-5xl font-bold mb-4 text-white">Sudhanshu Kumar</h2>
+            <h3 class="text-2xl text-blue-300 font-medium mb-6">Software Development Intern</h3>
+            
+            <div class="bg-white/10 border border-white/20 p-4 rounded-xl backdrop-blur-sm mb-8 inline-block">
+                <p class="text-gray-300 text-sm flex items-start gap-3">
+                    <i class="fa-solid fa-user-astronaut mt-1 text-purple-400"></i>
+                    I am deeply interested in software development and am eager to<br>
+                    continuously learn, grow, and build my technical skills in this field.
+                </p>
+            </div>
+            
+            <br>
+            <button class="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-400 hover:to-blue-400 text-white font-bold py-3 px-6 rounded-full transition transform hover:-translate-y-1 shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                <i class="fa-solid fa-file-lines mr-2"></i> View Resume
+            </button>
+        </div>
+
+        <div class="w-full md:w-1/2 flex justify-center">
+            <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md w-full max-w-lg shadow-2xl">
+                <h4 class="text-white text-center text-xl font-bold mb-6 flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-code"></i> Technical Skills
+                </h4>
+                
+                <div class="flex justify-center items-center h-72 w-full relative">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <section id="projects" class="px-10 lg:px-24 py-20 text-white">
+        <h2 class="text-3xl font-bold mb-12 text-center tracking-wider">MY <span class="text-purple-400">PROJECTS</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition duration-300 transform hover:-translate-y-2 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <i class="fa-solid fa-chart-line text-3xl text-purple-400"></i>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold text-gray-100 mb-2">Modern Portfolio Optimizer</h3>
+                <p class="text-gray-400 text-sm mb-6 h-16">A Python-based API for optimizing stock portfolios using advanced financial models.</p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="bg-blue-900/50 text-blue-200 text-xs px-2 py-1 rounded border border-blue-500/30">Python</span>
+                    <span class="bg-purple-900/50 text-purple-200 text-xs px-2 py-1 rounded border border-purple-500/30">API</span>
+                    <span class="bg-green-900/50 text-green-200 text-xs px-2 py-1 rounded border border-green-500/30">Finance</span>
+                </div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm hover:bg-white/10 transition duration-300 transform hover:-translate-y-2 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <i class="fa-solid fa-laptop-code text-3xl text-blue-400"></i>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold text-gray-100 mb-2">Interactive Developer Portfolio</h3>
+                <p class="text-gray-400 text-sm mb-6 h-16">A dynamic full-stack portfolio with secure admin login, Chart.js integration, and a sleek UI.</p>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="bg-yellow-900/50 text-yellow-200 text-xs px-2 py-1 rounded border border-yellow-500/30">JavaScript</span>
+                    <span class="bg-green-900/50 text-green-200 text-xs px-2 py-1 rounded border border-green-500/30">Node.js</span>
+                    <span class="bg-teal-900/50 text-teal-200 text-xs px-2 py-1 rounded border border-teal-500/30">Tailwind</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="resume" class="px-10 lg:px-24 py-20 text-white bg-black/20 border-t border-white/5">
+        <h2 class="text-3xl font-bold mb-12 text-center tracking-wider">MY <span class="text-purple-400">RESUME</span></h2>
+        
+        <div class="max-w-3xl mx-auto bg-white/5 border border-white/10 p-10 rounded-3xl backdrop-blur-md text-center shadow-2xl">
+            <i class="fa-solid fa-file-pdf text-7xl text-red-400 mb-6 drop-shadow-[0_0_15px_rgba(248,113,113,0.5)]"></i>
+            <h3 class="text-3xl font-bold mb-2">Sudhanshu Kumar</h3>
+            <p class="text-gray-400 mb-8 font-medium">Software Development Intern | C/C++, Python, Full-Stack</p>
+            
+            <a href="resume.pdf" download class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-4 px-10 rounded-full transition transform hover:scale-105 shadow-[0_0_20px_rgba(168,85,247,0.4)] inline-block">
+                <i class="fa-solid fa-download mr-2"></i> Download Resume (PDF)
+            </a>
+        </div>
+    </section>
+
+    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-[100] flex justify-center items-center backdrop-blur-sm">
+        <div class="bg-slate-900 border border-purple-500/30 p-8 rounded-2xl shadow-2xl w-11/12 max-w-md relative">
+            
+            <button onclick="toggleLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold tracking-wider text-white">ADMIN <span class="text-purple-400">LOGIN</span></h2>
+            </div>
+
+            <form id="loginForm" class="flex flex-col gap-5">
+                <p id="loginErrorMessage" class="text-red-500 text-sm font-semibold text-center hidden"></p>
+
+                <div>
+                    <label class="text-gray-400 text-sm font-semibold mb-1 block">Username</label>
+                    <input type="text" id="adminUsername" required placeholder="Enter username" 
+                        class="w-full bg-slate-800 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-slate-700 transition">
+                </div>
+                
+                <div>
+                    <label class="text-gray-400 text-sm font-semibold mb-1 block">Password</label>
+                    <input type="password" id="adminPassword" required placeholder="Enter password" 
+                        class="w-full bg-slate-800 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border border-slate-700 transition">
+                </div>
+
+                <button type="submit" class="mt-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-3 px-4 rounded-lg transition transform hover:scale-105 shadow-lg">
+                    Secure Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
