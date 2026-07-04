@@ -1,23 +1,20 @@
-// Function to toggle the Login Modal
+// 1. Function to toggle the Login Modal
 function toggleLoginModal() {
     const modal = document.getElementById('loginModal');
     
-    // Check if it currently has the 'hidden' class
     if (modal.classList.contains('hidden')) {
         modal.classList.remove('hidden');
-        // Prevent background scrolling when modal is open
         document.body.style.overflow = 'hidden'; 
     } else {
         modal.classList.add('hidden');
-        // Restore background scrolling
         document.body.style.overflow = 'auto'; 
     }
-} // End of toggleLoginModal function
+}
 
-// 1. SKILLS RADAR CHART & MODAL LISTENERS
+// 2. RUN EVERYTHING WHEN PAGE LOADS
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Optional: Close modal if user clicks outside the box
+    // --- A. Modal Close Listener ---
     const modal = document.getElementById('loginModal');
     if (modal) {
         modal.addEventListener('click', function(e) {
@@ -27,24 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Check if canvas exists on page before trying to draw the chart
+    // --- B. Skills Radar Chart ---
     const canvas = document.getElementById('skillsChart');
-    if (canvas) {
-        const ctxSkills = canvas.getContext('2d');
-        // ... (rest of your Chart.js code stays the same) ...
-
-// Optional: Close modal if user clicks outside the box
-document.getElementById('loginModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        toggleLoginModal();
-    }
-});
-
-// 1. SKILLS RADAR CHART
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById('skillsChart');
-    
-    // Check if canvas exists on page before trying to draw the chart
     if (canvas) {
         const ctxSkills = canvas.getContext('2d');
         new Chart(ctxSkills, {
@@ -57,7 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     backgroundColor: 'rgba(168, 85, 247, 0.5)',
                     borderColor: 'rgba(168, 85, 247, 1)',
                     pointBackgroundColor: '#60a5fa',
-                    borderWidth: 2
+                    borderWidth: 2,
+                    pointHoverBackgroundColor: '#ffffff',
+                    pointHoverBorderColor: 'rgba(168, 85, 247, 1)',
+                    pointHoverBorderWidth: 3
                 }]
             },
             options: {
@@ -75,20 +59,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-// Example: Sending a message to the backend API
-async function sendContactForm(name, email, message) {
-    try {
-        const response = await fetch('http://localhost:5000/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, message })
-        });
-        
-        const data = await response.json();
-        console.log(data.message); // Logs the backend success message
-    } catch (error) {
-        console.error('Error connecting to backend:', error);
-    }
-}
