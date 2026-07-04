@@ -12,7 +12,26 @@ function toggleLoginModal() {
         // Restore background scrolling
         document.body.style.overflow = 'auto'; 
     }
-}
+} // End of toggleLoginModal function
+
+// 1. SKILLS RADAR CHART & MODAL LISTENERS
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // Optional: Close modal if user clicks outside the box
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleLoginModal();
+            }
+        });
+    }
+
+    // Check if canvas exists on page before trying to draw the chart
+    const canvas = document.getElementById('skillsChart');
+    if (canvas) {
+        const ctxSkills = canvas.getContext('2d');
+        // ... (rest of your Chart.js code stays the same) ...
 
 // Optional: Close modal if user clicks outside the box
 document.getElementById('loginModal').addEventListener('click', function(e) {
