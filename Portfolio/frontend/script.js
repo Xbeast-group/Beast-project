@@ -1,3 +1,26 @@
+// Function to toggle the Login Modal
+function toggleLoginModal() {
+    const modal = document.getElementById('loginModal');
+    
+    // Check if it currently has the 'hidden' class
+    if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        // Prevent background scrolling when modal is open
+        document.body.style.overflow = 'hidden'; 
+    } else {
+        modal.classList.add('hidden');
+        // Restore background scrolling
+        document.body.style.overflow = 'auto'; 
+    }
+}
+
+// Optional: Close modal if user clicks outside the box
+document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        toggleLoginModal();
+    }
+});
+
 // 1. SKILLS RADAR CHART
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('skillsChart');
