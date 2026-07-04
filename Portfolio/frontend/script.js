@@ -1,3 +1,43 @@
+
+// --- LOGIN FORM SUBMISSION ---
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Form submit hone par page refresh ko rokne ke liye
+        
+        const usernameInput = document.getElementById('adminUsername').value;
+        const passwordInput = document.getElementById('adminPassword').value;
+        const errorMessage = document.getElementById('loginErrorMessage');
+
+        try {
+            // Backend API ko data bhejna
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: usernameInput, password: passwordInput })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert(data.message); // Success alert
+                toggleLoginModal();  // Modal ko close karne ke liye
+                // Aap yahan admin dashboard page par redirect bhi kar sakte hain
+            } else {
+                // Agar password galat hai toh error message dikhana
+                if (errorMessage) {
+                    errorMessage.innerText = data.message;
+                    errorMessage.classList.remove('hidden');
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Backend server se connection fail ho gaya!');
+        }
+    });
+}
 // 1. Function to toggle the Login Modal
 function toggleLoginModal() {
     const modal = document.getElementById('loginModal');
