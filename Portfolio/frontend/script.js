@@ -1,3 +1,43 @@
+// --- SKILLS RADAR CHART ---
+document.addEventListener('DOMContentLoaded', () => {
+    const ctx = document.getElementById('skillsChart');
+    
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                // Ye wahi skills hain jo aapki image mein hain
+                labels: ['C/C++', 'Python', 'Windows/Linux', 'Problem Solving', 'Communication'],
+                datasets: [{
+                    label: 'Skill Level',
+                    data: [85, 75, 65, 90, 80], // Graph ke points (0 se 100 tak)
+                    backgroundColor: 'rgba(168, 85, 247, 0.4)', // Purple transparent color
+                    borderColor: 'rgba(168, 85, 247, 1)',       // Purple border
+                    pointBackgroundColor: 'rgba(168, 85, 247, 1)',
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                        pointLabels: { 
+                            color: '#e2e8f0', // Text color
+                            font: { size: 12, family: "'Inter', sans-serif" }
+                        },
+                        ticks: { display: false, min: 0, max: 100 } // Numbers hide karne ke liye
+                    }
+                },
+                plugins: {
+                    legend: { display: false } // Legend hide karne ke liye
+                }
+            }
+        });
+    }
+});
 const express = require('express');
 const cors = require('cors');
 
