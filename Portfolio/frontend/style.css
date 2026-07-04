@@ -1,6 +1,24 @@
-/* Smooth scrolling behavior for nav links */
-html { 
-    scroll-behavior: smooth; 
+/* Google Fonts Import (Optional) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
 }
 
-/* Yahan aap aage chalkar apne pasand ki koi bhi custom design daal sakte hain */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6b21a8; 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9333ea; 
+}
