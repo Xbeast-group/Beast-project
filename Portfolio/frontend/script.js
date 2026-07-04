@@ -1,8 +1,98 @@
-// 1. SKILLS RADAR CHART
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById('skillsChart');
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+// Ye dono lines backend ko security aur data samajhne ki taqat deti hain
+app.use(cors());
+app.use(express.json()); 
+
+// --- LOGIN API ROUTE ---
+app.post('/api/login', (req, res) => {
+    // Agar req.body undefined hai, to default empty object {} set karein 
+    const { username, password } = req.body || {};
+
+    if (username === 'admin' && password === 'beast123') {
+        res.json({ success: true, message: 'Welcome Admin! Login Successful 🚀' });
+    } else {
+        // Agar id/password galat hai
+        res.status(401).json({ success: false, message: 'Galat Username ya Password!' });
+    }
+});
+
+// --- SERVER START ---
+const PORT = 5000;
+app.listen(PORT, () => {
+    console.log(`Server blasting off on port ${PORT} 🚀`);
+});
+
+// --- LOGIN FORM SUBMISSION ---
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Form submit hone par page refresh ko rokne ke liye
+        
+        const usernameInput = document.getElementById('adminUsername').value;
+        const passwordInput = document.getElementById('adminPassword').value;
+        const errorMessage = document.getElementById('loginErrorMessage');
+
+        try {
+            // Backend API ko data bhejna
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: usernameInput, password: passwordInput })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert(data.message); // Success alert
+                toggleLoginModal();  // Modal ko close karne ke liye
+                // Aap yahan admin dashboard page par redirect bhi kar sakte hain
+            } else {
+                // Agar password galat hai toh error message dikhana
+                if (errorMessage) {
+                    errorMessage.innerText = data.message;
+                    errorMessage.classList.remove('hidden');
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Backend server se connection fail ho gaya!');
+        }
+    });
+}
+// 1. Function to toggle the Login Modal
+function toggleLoginModal() {
+    const modal = document.getElementById('loginModal');
     
-    // Check if canvas exists on page before trying to draw the chart
+    if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; 
+    } else {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto'; 
+    }
+}
+
+// 2. RUN EVERYTHING WHEN PAGE LOADS
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- A. Modal Close Listener ---
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleLoginModal();
+            }
+        });
+    }
+
+    // --- B. Skills Radar Chart ---
+    const canvas = document.getElementById('skillsChart');
     if (canvas) {
         const ctxSkills = canvas.getContext('2d');
         new Chart(ctxSkills, {
@@ -15,7 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     backgroundColor: 'rgba(168, 85, 247, 0.5)',
                     borderColor: 'rgba(168, 85, 247, 1)',
                     pointBackgroundColor: '#60a5fa',
-                    borderWidth: 2
+                    borderWidth: 2,
+                    pointHoverBackgroundColor: '#ffffff',
+                    pointHoverBorderColor: 'rgba(168, 85, 247, 1)',
+                    pointHoverBorderWidth: 3
                 }]
             },
             options: {
@@ -33,20 +126,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-// Example: Sending a message to the backend API
-async function sendContactForm(name, email, message) {
-    try {
-        const response = await fetch('http://localhost:5000/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, message })
-        });
-        
-        const data = await response.json();
-        console.log(data.message); // Logs the backend success message
-    } catch (error) {
-        console.error('Error connecting to backend:', error);
-    }
-}
