@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import BulletAccordion from "@/components/BulletAccordion";
+import Navbar from "@/app/navbar/page";
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -29,7 +30,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 py-10 px-4">
+    <main className="min-h-screen bg-gray-50 ">
+      <Navbar/>
       <div className="max-w-2xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold text-gray-800 text-center">
           Terms & Conditions Summarizer

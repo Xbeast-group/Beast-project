@@ -1,38 +1,49 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server"
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export async function POST(req) {
-  try {
-    const { text } = await req.json();
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-    if (!text || text.trim().length < 50) {
+export async function POST(req){
+  try{
+    const {text} = await req.json()
+
+    if(!text || text.trim().length < 50){
       return NextResponse.json(
-        { error: "Please provide valid terms and conditions text." },
-        { status: 400 }
-      );
+        {error:"Please provide valid terms and conditions text."},
+        {status:400}
+      )
     }
+    
+    const prompt = `You are given a Terms and Conditions document.
+    Summarize it into concise bullet points.
 
-    // Mock response - testing ke liye (real API call comment out kar diya)
-    const bullets = [
-      {
-        title: "Data Collection Policy",
-        detail: "Company user ka personal data collect karti hai jaise email, name, aur usage patterns. Ye data service improve karne ke liye use hota hai.",
-      },
-      {
-        title: "Third-Party Sharing",
-        detail: "User ka data kabhi bhi third-party advertisers ke sath share nahi kiya jayega bina explicit consent ke.",
-      },
-      {
-        title: "Account Termination",
-        detail: "Company kisi bhi user ka account bina notice ke terminate kar sakti hai agar terms violate hote hain.",
-      },
-    ];
-
-    return NextResponse.json({ bullets });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json(
-      { error: "Failed to summarize. Try again." },
-      { status: 500 }
-    );
+    Return ONLY valid JSON (no markdown, no backticks) in this exact format:
+[
+  {
+    "title": "Short bullet point title (max 8 words)",
+    "detail": "2-3 line detailed explanation of this point"
   }
+]
+
+Here is the document to summmarize;
+"""${text}"""
+`
+
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const response = await model.generateContent(prompt);
+
+    const raw = response.response.text();
+    const cleaned = raw.replace(/```json|```/g, "").trim();
+    const bullets = JSON.parse(cleaned);
+
+    return NextResponse.json({bullets});
+  } catch (err){
+    console.error(err)
+    return NextResponse.json(
+      {error:"Failed to summarize the text. please try again."},
+      {status:500}
+    )
+
+  }
+
 }
