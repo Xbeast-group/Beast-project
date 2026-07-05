@@ -31,7 +31,7 @@ export async function POST(req) {
       password: hashedPassword,
     });
 
-    const token = await signToken({ userId: user._id, email: user.email });
+    const token = await signToken({ userId: user._id.toString(), email: user.email });
 
     const response = NextResponse.json({
       message: "Registered successfully",

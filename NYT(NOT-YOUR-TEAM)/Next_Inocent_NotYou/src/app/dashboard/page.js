@@ -88,18 +88,19 @@ export default function DashboardPage() {
   }
 
  return (
-  <div className="min-h-screen flex bg-gray-50">
+  <div className="min-h-screen bg-black flex bg-gray-50">
     {/* Sidebar */}
     <aside
-      className={`bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ${
+      className={`bg-black border-2 border-orange-500 flex flex-col transition-all duration-300 ${
         sidebarOpen ? "w-64 p-4" : "w-0 p-0 overflow-hidden"
       }`}
     >
       <button
         onClick={() => router.push("/")}
-        className="text-xl font-bold text-blue-600 mb-8 text-left whitespace-nowrap"
+        className="text-xl font-bold relative text-blue-600 mb-8 text-left whitespace-nowrap"
       >
-        T&C Summarizer
+        <span className="text-2xl font-bold text-orange-600 ">NEXT INOCENT  </span>
+          <span className=" font-bold top-2 text-white left-32  text-xl absolute"> Not You</span>
       </button>
 
       <nav className="flex flex-col gap-2">
@@ -107,8 +108,8 @@ export default function DashboardPage() {
           onClick={() => setActiveTab("summarizer")}
           className={`text-left px-3 py-2 rounded-lg font-medium whitespace-nowrap ${
             activeTab === "summarizer"
-              ? "bg-blue-50 text-blue-600"
-              : "text-gray-600 hover:bg-gray-50"
+              ? "bg-orange-500 text-white"
+              : "text-white hover:bg-orange-400"
           }`}
         >
           Summarizer
@@ -117,8 +118,8 @@ export default function DashboardPage() {
           onClick={() => setActiveTab("history")}
           className={`text-left px-3 py-2 rounded-lg font-medium whitespace-nowrap ${
             activeTab === "history"
-              ? "bg-blue-50 text-blue-600"
-              : "text-gray-600 hover:bg-gray-50"
+              ? "bg-orange-500 text-white"
+              : "text-white hover:bg-orange-400"
           }`}
         >
           History ({summaries.length})
@@ -127,8 +128,8 @@ export default function DashboardPage() {
           onClick={() => setActiveTab("profile")}
           className={`text-left px-3 py-2 rounded-lg font-medium whitespace-nowrap ${
             activeTab === "profile"
-              ? "bg-blue-50 text-blue-600"
-              : "text-gray-600 hover:bg-gray-50"
+              ? "bg-orange-500 text-white"
+              : "text-white hover:bg-orange-400"
           }`}
         >
           Profile
@@ -137,36 +138,36 @@ export default function DashboardPage() {
 
       <button
         onClick={handleLogout}
-        className="mt-auto text-sm text-red-600 hover:underline text-left whitespace-nowrap"
+        className="mt-auto text-sm text-orange-600 hover:underline text-left whitespace-nowrap"
       >
         Logout
       </button>
     </aside>
 
     {/* Main content */}
-    <main className="flex-1 p-8">
+    <main className="flex-1 bg-black p-8">
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="mb-6 p-2 rounded-lg hover:bg-gray-100 text-gray-600"
+        className="mb-6 p-2 hover:text-white rounded-lg  text-orange-500"
       >
         {sidebarOpen ? "☰ Close Menu" : "☰ Open Menu"}
       </button>
 
       {activeTab === "summarizer" && (
         <div className="max-w-2xl space-y-6">
-          <h1 className="text-2xl font-bold text-gray-800">Summarize T&C</h1>
+          <h1 className="text-2xl font-bold text-orange-500">Paste T&C and Summarize</h1>
 
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Paste your Terms & Conditions here..."
-            className="w-full h-60 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full text-white h-60 p-4 border border-orange-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
 
           <button
             onClick={handleSummarize}
             disabled={loading || !text}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
+            className="w-full bg-orange-500  text-white py-3 rounded-lg font-medium hover:bg-orange-400 disabled:opacity-50"
           >
             {loading ? "Summarizing..." : "Summarize"}
           </button>
@@ -179,12 +180,12 @@ export default function DashboardPage() {
 
       {activeTab === "history" && (
         <div className="max-w-2xl space-y-3">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
+          <h1 className="text-2xl font-bold text-orange-500 mb-4">
             Your Summary History
           </h1>
 
           {summaries.length === 0 && (
-            <p className="text-gray-500 text-sm">No summaries yet. Go create one!</p>
+            <p className="text-white text-sm">No summaries yet. Go create one!</p>
           )}
 
           {summaries.map((summary) => (
@@ -208,10 +209,10 @@ export default function DashboardPage() {
 
       {activeTab === "profile" && (
         <div className="max-w-2xl">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Profile</h1>
-          <div className="bg-white p-5 rounded-lg shadow-sm">
-            <p className="text-gray-600">Name: {user.name}</p>
-            <p className="text-gray-600">Email: {user.email}</p>
+          <h1 className="text-2xl font-bold text-orange-500 mb-4">Profile</h1>
+          <div className="bg-orange-500 p-5 rounded-lg shadow-sm">
+            <p className="text-white">Name: {user.name}</p>
+            <p className="text-white">Email: {user.email}</p>
           </div>
         </div>
       )}

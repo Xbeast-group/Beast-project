@@ -24,11 +24,11 @@ await connectToDatabase();
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
     }
 
-    const token = await signToken({ userId: user._id, email: user.email });
+    const token = await signToken({ userId: user._id.toString(), email: user.email });
 
     const response = NextResponse.json({
       message: "Logged in successfully",
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { id: user._id.toString(), name: user.name, email: user.email },
     });
 
     response.cookies.set("token", token, {
