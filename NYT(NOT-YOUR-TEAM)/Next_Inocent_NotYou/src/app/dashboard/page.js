@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import BulletAccordion from "@/components/BulletAccordion";
 
+
 export default function DashboardPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("summarizer");
@@ -142,6 +143,7 @@ export default function DashboardPage() {
       >
         Logout
       </button>
+      
     </aside>
 
     {/* Main content */}
@@ -191,15 +193,15 @@ export default function DashboardPage() {
           {summaries.map((summary) => (
             <div
               key={summary._id}
-              className="bg-white p-4 rounded-lg shadow-sm border border-gray-100"
+              className="bg-orange-400 p-4 rounded-lg shadow-sm border border-gray-100"
             >
-              <p className="text-xs text-gray-400 mb-2">
+              <p className="text-xs text-white mb-2">
                 {new Date(summary.createdAt).toLocaleString()}
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-800">
                 {summary.originalText.slice(0, 150)}...
               </p>
-              <p className="text-xs text-blue-600 mt-2">
+              <p className="text-xs font-semibold text-white  mt-2">
                 {summary.bullets.length} bullet points generated
               </p>
             </div>
