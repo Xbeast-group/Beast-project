@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import BulletAccordion from "@/components/BulletAccordion";
-import Navbar from "@/app/navbar/page";
+import Navbar from "@/components/Navbar/page";
 
 export default function Home() {
   const [text, setText] = useState("");
