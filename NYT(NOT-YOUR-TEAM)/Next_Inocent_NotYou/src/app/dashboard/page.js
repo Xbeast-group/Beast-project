@@ -89,10 +89,10 @@ export default function DashboardPage() {
   }
 
  return (
-  <div className="min-h-screen bg-black flex bg-gray-50">
+  <div className="min-h-screen bg-[#0a0a0a] flex ">
     {/* Sidebar */}
     <aside
-      className={`bg-black border-2 border-orange-500 flex flex-col transition-all duration-300 ${
+      className={`bg-black flex flex-col transition-all duration-300 ${
         sidebarOpen ? "w-64 p-4" : "w-0 p-0 overflow-hidden"
       }`}
     >
@@ -100,7 +100,7 @@ export default function DashboardPage() {
         onClick={() => router.push("/")}
         className="text-xl font-bold relative text-blue-600 mb-8 text-left whitespace-nowrap"
       >
-        <span className="text-2xl font-bold text-orange-600 ">NEXT INOCENT  </span>
+        <span className="text-2xl font-bold text-violet-900 ">NEXT INOCENT  </span>
           <span className=" font-bold top-2 text-white left-32  text-xl absolute"> Not You</span>
       </button>
 
@@ -109,8 +109,8 @@ export default function DashboardPage() {
           onClick={() => setActiveTab("summarizer")}
           className={`text-left px-3 py-2 rounded-lg font-medium whitespace-nowrap ${
             activeTab === "summarizer"
-              ? "bg-orange-500 text-white"
-              : "text-white hover:bg-orange-400"
+              ? "bg-violet-900 text-white"
+              : "text-white hover:bg-violet-800"
           }`}
         >
           Summarizer
@@ -119,8 +119,8 @@ export default function DashboardPage() {
           onClick={() => setActiveTab("history")}
           className={`text-left px-3 py-2 rounded-lg font-medium whitespace-nowrap ${
             activeTab === "history"
-              ? "bg-orange-500 text-white"
-              : "text-white hover:bg-orange-400"
+              ? "bg-violet-900 text-white"
+              : "text-white hover:bg-violet-800"
           }`}
         >
           History ({summaries.length})
@@ -129,8 +129,8 @@ export default function DashboardPage() {
           onClick={() => setActiveTab("profile")}
           className={`text-left px-3 py-2 rounded-lg font-medium whitespace-nowrap ${
             activeTab === "profile"
-              ? "bg-orange-500 text-white"
-              : "text-white hover:bg-orange-400"
+              ? "bg-violet-900 text-white"
+              : "text-white hover:bg-violet-800"
           }`}
         >
           Profile
@@ -139,7 +139,7 @@ export default function DashboardPage() {
 
       <button
         onClick={handleLogout}
-        className="mt-auto text-sm text-orange-600 hover:underline text-left whitespace-nowrap"
+        className="mt-auto text-sm text-violet-900 hover:underline text-left whitespace-nowrap"
       >
         Logout
       </button>
@@ -150,31 +150,31 @@ export default function DashboardPage() {
     <main className="flex-1 bg-black p-8">
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="mb-6 p-2 hover:text-white rounded-lg  text-orange-500"
+        className="mb-6 p-2 hover:text-white rounded-lg  text-violet-500"
       >
         {sidebarOpen ? "☰ Close Menu" : "☰ Open Menu"}
       </button>
 
       {activeTab === "summarizer" && (
         <div className="max-w-2xl space-y-6">
-          <h1 className="text-2xl font-bold text-orange-500">Paste T&C and Summarize</h1>
+          <h1 className="text-2xl font-bold text-white">Paste T&C and Summarize</h1>
 
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Paste your Terms & Conditions here..."
-            className="w-full text-white h-60 p-4 border border-orange-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="w-full text-white h-60 p-4 border border-violet-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
           />
 
           <button
             onClick={handleSummarize}
             disabled={loading || !text}
-            className="w-full bg-orange-500  text-white py-3 rounded-lg font-medium hover:bg-orange-400 disabled:opacity-50"
+            className="w-full bg-violet-500  text-white py-3 rounded-lg font-medium hover:bg-violet-400 disabled:opacity-50"
           >
             {loading ? "Summarizing..." : "Summarize"}
           </button>
 
-          {summarizeError && <p className="text-red-500 text-sm">{summarizeError}</p>}
+          {summarizeError && <p className="text-violet-500 font-bold text-sm">{summarizeError}</p>}
 
           {bullets.length > 0 && <BulletAccordion bullets={bullets} />}
         </div>
@@ -182,7 +182,7 @@ export default function DashboardPage() {
 
       {activeTab === "history" && (
         <div className="max-w-2xl space-y-3">
-          <h1 className="text-2xl font-bold text-orange-500 mb-4">
+          <h1 className="text-2xl font-bold text-white mb-4">
             Your Summary History
           </h1>
 
@@ -193,15 +193,15 @@ export default function DashboardPage() {
           {summaries.map((summary) => (
             <div
               key={summary._id}
-              className="bg-orange-400 p-4 rounded-lg shadow-sm border border-gray-100"
+              className="bg-violet-500 p-4 rounded-lg shadow-sm border "
             >
-              <p className="text-xs text-white mb-2">
+              <p className="text-xs text-white font-bold mb-2">
                 {new Date(summary.createdAt).toLocaleString()}
               </p>
-              <p className="text-sm text-gray-800">
+              <p className="text-sm text-gray-200">
                 {summary.originalText.slice(0, 150)}...
               </p>
-              <p className="text-xs font-semibold text-white  mt-2">
+              <p className="text-xs font-semibold text-blue-900  mt-2">
                 {summary.bullets.length} bullet points generated
               </p>
             </div>
@@ -211,8 +211,8 @@ export default function DashboardPage() {
 
       {activeTab === "profile" && (
         <div className="max-w-2xl">
-          <h1 className="text-2xl font-bold text-orange-500 mb-4">Profile</h1>
-          <div className="bg-orange-500 p-5 rounded-lg shadow-sm">
+          <h1 className="text-2xl font-bold text-violet-500 mb-4">Profile</h1>
+          <div className="bg-violet-500 p-5 rounded-lg shadow-sm">
             <p className="text-white">Name: {user.name}</p>
             <p className="text-white">Email: {user.email}</p>
           </div>

@@ -16,9 +16,9 @@ export default function BulletAccordion({ bullets }) {
           >
             <button
               onClick={() => setOpenIndex(isOpen ? null : idx)}
-              className="w-full flex justify-between items-center px-4 py-3 bg-gray-50 hover:bg-gray-100 transition text-left"
+              className="w-full flex justify-between items-center px-4 py-3 bg-violet-500 hover:bg-violet-400 transition text-left"
             >
-              <span className="font-medium text-gray-800">{item.title}</span>
+              <span className="font-medium text-white">{item.title}</span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
                   isOpen ? "rotate-180" : ""
@@ -26,7 +26,7 @@ export default function BulletAccordion({ bullets }) {
               />
             </button>
             {isOpen && (
-              <div className="px-4 py-3 text-sm text-gray-600 bg-white border-t border-gray-100">
+              <div className="px-4 py-3 text-sm text-white bg-violet-500 border-t border-gray-100">
                 {item.detail}
               </div>
             )}
