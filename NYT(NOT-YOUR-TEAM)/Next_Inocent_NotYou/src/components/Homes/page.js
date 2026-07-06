@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
     const router = useRouter();
   return (
-   <div className="w-full h-screen overflow-hidden flex justify-between  bg-black ">
+   <div className="w-full h-screen overflow-hidden flex justify-between  bg-[#0a0a0a] ">
 
     <div className=" w-200   h-screen">
       <div className="flex relative h-screen     items-center ">

@@ -35,19 +35,19 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a]  px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white p-6 rounded-lg shadow-sm space-y-4"
+        className="w-full max-w-sm border-2 border-violet-500 bg-[#0a0a0a]  p-6 rounded-lg shadow-sm space-y-4"
       >
-        <h1 className="text-xl font-bold text-gray-800 text-center">Login</h1>
+        <h1 className="text-xl font-bold text-violet-500 text-center">Login</h1>
 
         <input
           type="email"
           placeholder="Email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border text-violet-500 border-violet-500 rounded-lg"
           required
         />
         <input
@@ -55,7 +55,7 @@ export default function LoginPage() {
           placeholder="Password"
           value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border text-violet-500 border-violet-500 rounded-lg"
           required
         />
 
@@ -64,14 +64,14 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-violet-500 text-white py-3 rounded-lg font-medium hover:bg-violet-600 disabled:opacity-50"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
 
         <p className="text-sm text-center text-gray-500">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-600 font-medium">
+          <a href="/register" className="text-violet-500 font-medium">
             Register
           </a>
         </p>

@@ -35,19 +35,19 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <main className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white p-6 rounded-lg shadow-sm space-y-4"
+        className="w-full max-w-sm border-2 border-violet-500 bg-[#0a0a0a]  p-6 rounded-lg shadow-sm space-y-4"
       >
-        <h1 className="text-xl font-bold text-gray-800 text-center">Create Account</h1>
+        <h1 className="text-xl font-bold text-violet-500 text-center">Create Account</h1>
 
         <input
           type="text"
           placeholder="Full Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border text-violet-500 border-violet-500 rounded-lg"
           required
         />
         <input
@@ -55,7 +55,7 @@ export default function RegisterPage() {
           placeholder="Email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border text-violet-500 border-violet-500 rounded-lg"
           required
         />
         <input
@@ -63,7 +63,7 @@ export default function RegisterPage() {
           placeholder="Password"
           value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border text-violet-500 border-violet-500 rounded-lg"
           required
         />
 
@@ -72,14 +72,14 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-violet-500 text-white py-3 rounded-lg font-medium hover:bg-violet-600 disabled:opacity-50"
         >
           {loading ? "Creating..." : "Register"}
         </button>
 
         <p className="text-sm text-center text-gray-500">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 font-medium">
+          <a href="/login" className="text-violet-500 font-medium">
             Login
           </a>
         </p>
