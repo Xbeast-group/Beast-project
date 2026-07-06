@@ -2,6 +2,7 @@
 import Navbar from "@/components/Navbar/page";
 import Homes from "@/components/Homes/page";
 import { useRouter } from "next/navigation";
+import Homepage2 from "@/components/Homepage2/page";
 
 export default function Home() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-black ">
       <Navbar/>,
       <Homes/>
+      <Homepage2/>
       <div className="text-center space-y-6 max-w-md">
         <h1 className="text-3xl font-bold text-gray-800">
           Welcome to T&C Summarizer
