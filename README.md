@@ -110,9 +110,9 @@ http://localhost:3000
 
 ## 👨‍💻 Author
 
-**Kshitiz Yadav**
+**X BEAST-CODERZ**
 
-Engineering ASPIRANT |
+Engineering ASPIRANTS 
 
 Interested in AI, Software Development, Hardware, and Building Real-World Projects.
 
