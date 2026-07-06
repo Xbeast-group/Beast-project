@@ -26,7 +26,7 @@ An AI-powered web application that transforms complex Terms & Conditions into co
 * HTML5
 * CSS3
 * JavaScript
-
+*  Node.js
 ### Backend
 
 * Node.js
@@ -34,11 +34,6 @@ An AI-powered web application that transforms complex Terms & Conditions into co
 
 ### AI Models
 * Groq API
-
-
----
-
-## 📂 Project Structure
 
 
 
@@ -93,37 +88,23 @@ http://localhost:3000
 
 ---
 
-## 📸 Screenshots
 
 
 ## 💡 Future Improvements
 
-* PDF Upload Support
-* URL-based Terms & Conditions Extraction
+* COPY Terms & Conditions Extraction
 * Multi-language Support
-* Risk Score Analysis
 * Clause Categorization
 * Save Summary History
-* Dark Mode
-* Browser Extension
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contribution
 
-Contributions are welcome!
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to your branch
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+*DEVELOPER - Ankit Kumar
+*PPT NINJA - Shashank Gupta
+*UI/UX DESIGNER - Deepika koli
+*Admin - Kshitiz Yadav
 
 ---
 
@@ -131,7 +112,7 @@ This project is licensed under the MIT License.
 
 **Kshitiz Yadav**
 
-Engineering Student | Electronics & Communication
+Engineering ASPIRANT |
 
 Interested in AI, Software Development, Hardware, and Building Real-World Projects.
 
