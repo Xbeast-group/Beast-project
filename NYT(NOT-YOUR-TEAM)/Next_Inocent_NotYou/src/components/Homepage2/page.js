@@ -31,8 +31,8 @@ export default function Homepage2() {
         <img src="/team 4.png" 
         className="sm:w-71 w-90 h-190  top-20 left-100 sm:left-92  object-bottom absolute sm:h-140 object-cover" alt="Landing Image" />
             <h1 className="text-5xl font-extrabold text-white absolute top-170 sm:top-120 sm:left-115 left-130 z-99">THE</h1>
-            <h1 className="sm:text-4xl font-extrabold text-5xl text-white absolute top-185 sm:top-135 sm:left-95 left-105 z-99">PPT MACKER </h1>        
-           <div className=" sm:w-70 sm:h-80 sm:top-100  sm:left-94 w-120 h-80 top-130  left-90   bg-violet-900 mask-linear-from-orange-500  absolute" ></div>
+            <h1 className="sm:text-5xl font-extrabold text-5xl text-white absolute top-185 sm:top-135 sm:left-95 left-105 z-99">PPT NINJA </h1>        
+           <div className=" sm:w-72 sm:h-80 sm:top-100  sm:left-94 w-120 h-80 top-130  left-90   bg-violet-900 mask-linear-from-orange-500  absolute" ></div>
         </div>
 
        <div className=" w-200 sm:flex right-0  absolute sm:left-150 top-360 sm:top-0 h-screen">
