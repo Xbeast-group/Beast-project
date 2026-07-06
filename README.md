@@ -101,10 +101,13 @@ http://localhost:3000
 
 ## 🤝 Contribution
 
-*DEVELOPER - Ankit Kumar
-*PPT NINJA - Shashank Gupta
-*UI/UX DESIGNER - Deepika koli
-*Admin - Kshitiz Yadav
+* DEVELOPER - Ankit Kumar
+
+* PPT NINJA - Shashank Gupta
+
+* UI/UX DESIGNER - Deepika koli
+
+* Admin - Kshitiz Yadav
 
 ---
 
