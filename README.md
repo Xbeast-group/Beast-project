@@ -126,3 +126,8 @@ Interested in AI, Software Development, Hardware, and Building Real-World Projec
 If you found this project helpful, consider giving it a ⭐ on GitHub.
 
 It motivates further development and helps others discover the project.
+
+##Social links 🌐 
+these are some clips and added on instagram 
+https://www.instagram.com/reel/DaeuIQ1qRKu/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==
+
